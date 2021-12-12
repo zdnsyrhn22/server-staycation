@@ -20,7 +20,7 @@
                     <td><%= bank[i].bankName %></td>
                     <td><%= bank[i].accountNumber %></td>
                     <td><%= bank[i].name %></td>
-                    <td><img src="http://localhost:3000/<%= bank[i].imageUrl %>" class="img" alt="imageUrl" width="70px"></td>
+                    <td><img src="https://api-server-staycation.herokuapp.com/<%= bank[i].imageUrl %>" class="img" alt="imageUrl" width="70px"></td>
                     <td>
                         <form action="/admin/bank/<%= bank[i].id %>?_method=DELETE" method="POST">
                           <a href="javascript:void()" type="button" class="btn btn-warning btn-sm" id="edit-button"  data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="showModal(this)" data-id="<%= bank[i].id %>"data-bankName="<%= bank[i].bankName %>" data-accountNumber="<%= bank[i].accountNumber %>" data-name="<%= bank[i].name %>" data-imageUrl="<%= bank[i].imageUrl %>">
