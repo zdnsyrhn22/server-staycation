@@ -23,6 +23,7 @@ const adminRouter = require('./routes/admin');
 const apiRouter = require('./routes/api');
 
 var app = express();
+var cors = require('cors')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
