@@ -46,7 +46,9 @@ app.use(flash());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //admin
-app.use(cors())
+app.use(cors({
+  origin: "*"
+}))
 app.use('/admin', adminRouter);
 app.use('/api/v1/member', apiRouter);
 
