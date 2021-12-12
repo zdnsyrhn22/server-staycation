@@ -1,0 +1,40 @@
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            DataTables <%= title %>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover" id="table1">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i<category.length; i++){ %>
+                        <tr>
+                            <td><%= i + 1 %></td>
+                            <td><%= category[i].name %></td>
+                            <td>
+                                <form action="/admin/category/<%= category[i].id %>?_method=DELETE" method="POST">
+                                <a href="javascript:void()" type="button" class="btn btn-warning btn-sm" id="edit-button"  data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="showModal(this)" data-id="<%= category[i].id %>" data-name="<%= category[i].name %>"><i class="fa-solid fa-pen"></i></a>
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    const showModal = (data) => {
+      //put data to modal
+      document.querySelector("#edit-modal #id").value = data.getAttribute("data-id");
+      document.querySelector("#edit-modal #name").value = data.getAttribute("data-name");
+    };
+  </script>

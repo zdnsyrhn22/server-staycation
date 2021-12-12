@@ -1,0 +1,48 @@
+<%- include('../../parts/header.ejs') %>
+
+<div class="page-heading">
+  <div class="page-title">
+    <div class="row">
+      <div class="col-12 col-md-6 order-md-1 order-last">
+        <h3>Item</h3>
+        <p class="text-subtitle text-muted">For user to check they list</p>
+      </div>
+      <div class="col-12 col-md-6 order-md-2 order-first">
+        <nav
+          aria-label="breadcrumb"
+          class="breadcrumb-header float-start float-lg-end"
+        >
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Item</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if(action == 'view'){ %>
+<div class="page-content">
+  <section id="view-page1" class="d-block"><%- include('table_item.ejs') %></section>
+  <section id="view-page2" class="d-none"><%- include('add_item.ejs') %></section>
+</div>
+<%- include('../../parts/addButton.ejs', {type:'cycleButton'}) %>
+<%- include('../../parts/alert.ejs') %>
+<% } %>
+
+<% if(action == 'show image'){ %>
+<div class="page-content">
+  <%- include('show_image.ejs') %>
+</div>
+<%- include('../../parts/addButton.ejs', {type:'urlButton', url:'admin/item', color:'warning', icon:'arrow-rotate-left'}) %>
+<% } %>
+
+<% if(action == 'edit'){ %>
+<div class="page-content">
+  <%- include('edit_item.ejs') %>
+</div>
+<%- include('../../parts/addButton.ejs', {type:'urlButton', url:'admin/item', color:'warning', icon:'arrow-rotate-left'}) %>
+<% } %>
+
+<%- include('../../parts/footer.ejs') %>

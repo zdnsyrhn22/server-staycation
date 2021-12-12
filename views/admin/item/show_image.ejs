@@ -1,0 +1,13 @@
+<section class="section">
+  <div class="row">
+    <% for(let i = 0; i < item.imageId.length; i++ ){ %>
+      <div class="col-md-4">
+        <div class="card shadow mb-4 mt-2">
+          <div class="card-body">
+            <img src="http://localhost:3000/<%= item.imageId[i].imageUrl %>" style="width: 100%" alt="imgItem">
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</section>

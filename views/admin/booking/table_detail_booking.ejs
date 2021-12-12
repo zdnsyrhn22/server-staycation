@@ -1,0 +1,59 @@
+<section class="section">
+  <div class="row p-5">
+    <div class="col-md-4">
+      <img
+        src="http://localhost:3000/<%= booking.payments.proofPayment %>"
+        class="img-thumbnail shadow"
+        alt="imgDetailBooking"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name Member</th>
+                <th>Total</th>
+                <th>Bank From</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td>
+                <%= booking.memberId.firstName %> <%= booking.memberId.lastName
+                %>
+              </td>
+              <td>$ <%= booking.total %></td>
+              <td><%= booking.payments.bankFrom %></td>
+              <td><%= booking.itemId.title %></td>
+            </tbody>
+          </table>
+          <div class="float-end m-1">
+            <form
+              class="d-inline"
+              action="/admin/booking/<%= booking.id %>/reject?_method=PUT"
+              method="POST"
+            >
+              <button type="submit" class="btn btn-danger btn-sm">
+                <i class="fa-solid fa-times"></i> Reject
+              </button>
+            </form>
+            <form
+              class="d-inline"
+              action="/admin/booking/<%= booking.id %>/confirmation?_method=PUT"
+              method="POST"
+            >
+              <button type="submit" class="btn btn-success btn-sm">
+                <i class="fa-solid fa-check"></i> Confirmation
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../../parts/addButton.ejs', {type:'urlButton', url:'admin/booking',
+color:'warning', icon:'arrow-rotate-left'}) %>

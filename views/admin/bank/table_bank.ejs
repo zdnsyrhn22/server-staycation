@@ -1,0 +1,48 @@
+<section class="section">
+  <div class="card">
+    <div class="card-header">DataTables <%= title %></div>
+    <div class="card-body">
+      <table class="table table-hover" id="table1">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Bank Name</th>
+            <th>Account Number</th>
+            <th>Name</th>
+            <th>image</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i<bank.length; i++){ %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= bank[i].bankName %></td>
+                    <td><%= bank[i].accountNumber %></td>
+                    <td><%= bank[i].name %></td>
+                    <td><img src="http://localhost:3000/<%= bank[i].imageUrl %>" class="img" alt="imageUrl" width="70px"></td>
+                    <td>
+                        <form action="/admin/bank/<%= bank[i].id %>?_method=DELETE" method="POST">
+                          <a href="javascript:void()" type="button" class="btn btn-warning btn-sm" id="edit-button"  data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="showModal(this)" data-id="<%= bank[i].id %>"data-bankName="<%= bank[i].bankName %>" data-accountNumber="<%= bank[i].accountNumber %>" data-name="<%= bank[i].name %>" data-imageUrl="<%= bank[i].imageUrl %>">
+                          <i class="fa-solid fa-pen"></i></a>
+                          <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+  const showModal = (data) => {
+    //put data to modal
+    document.querySelector("#edit-modal #id").value = data.getAttribute("data-id");;
+    document.querySelector("#edit-modal #bankName").value = data.getAttribute("data-bankName");
+    document.querySelector("#edit-modal #accountNumber").value = data.getAttribute("data-accountNumber");
+    document.querySelector("#edit-modal #name").value = data.getAttribute("data-name");
+    // document.querySelector("#edit-modal #image").value = data.getAttribute("data-imageUrl");
+  };
+</script>

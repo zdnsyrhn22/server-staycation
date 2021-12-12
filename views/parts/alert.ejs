@@ -1,0 +1,31 @@
+<% if(alert.message != '') { %>
+<div class="position-fixed top-0 end-0 p-1" id="toast" style="z-index: 100">
+  <div
+    class="
+      toast
+      align-items-center
+      text-white
+      bg-<%=
+      alert.status
+      %>
+      border-0
+      fade
+      show
+    "
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="d-flex">
+      <div class="toast-body"><%= alert.message %></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  setTimeout(() => {
+    document.getElementById("toast").style.display = "none";
+  }, 3000);
+</script>
+<% } %>
+

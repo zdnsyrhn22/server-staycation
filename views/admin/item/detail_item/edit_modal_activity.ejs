@@ -1,0 +1,84 @@
+<!--scrolling content Modal -->
+<div
+  class="modal fade"
+  id="edit-activity-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="edit-activity-modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edit-activity-modal">
+          Update Activity
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i data-feather="x"></i>
+        </button>
+      </div>
+      <form action="/admin/item/update/activity?_method=PUT" method="POST" enctype="multipart/form-data">
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Enter Name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              name="type"
+              placeholder="Enter Type"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="image"
+              name="image"
+              placeholder="Enter Image"
+            />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <input type="hidden" name="itemId" id="itemId" value="<%= itemId %>">
+          <input type="hidden" name="id" id="id">
+          <button
+            type="button"
+            class="btn btn-light-secondary"
+            data-bs-dismiss="modal"
+          >
+            <i class="bx bx-x d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Close</span>
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary ml-1"
+          >
+            <i class="bx bx-check d-block d-sm-none"></i>
+            <span class="d-none d-sm-block">Submit</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

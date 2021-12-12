@@ -1,0 +1,40 @@
+<section class="section">
+    <div class="card">
+        <div class="card-header">
+            DataTables <%= title %>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover" id="table1">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i<item.length; i++){ %>
+                        <tr>
+                            <td><%= i + 1 %></td>
+                            <td><%= item[i].title %></td>
+                            <td>$ <%= item[i].price %></td>
+                            <td><%= item[i].city %></td>
+                            <td><%= item[i].country %></td>
+                            <td>
+                                <form action="/admin/item/<%= item[i].id %>/delete?_method=DELETE" method="POST">
+                                <a href="/admin/item/show-detail-item/<%= item[i].id %>" class="btn btn-success btn-sm"><i class="fa-solid fa-eye"></i></a>
+                                <a href="/admin/item/show-image/<%= item[i].id %>" class="btn btn-info btn-sm"><i class="fa-solid fa-image"></i></a>
+                                <a href="/admin/item/<%= item[i].id %>" type="button" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i></a>
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,59 @@
+<% if(type == 'modalButton'){%>
+<!-- Button trigger for scrolling content modal -->
+<div class="position-fixed bottom-0 end-0 px-5 pb-5" style="z-index: 1000;">
+    <button type="button" class="btn btn-lg btn-primary rounded-pill shadow" data-bs-toggle="modal"
+        data-bs-target="<%= target %>">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+<% } %>
+
+<% if(type == 'cycleButton'){%>
+  <!-- Button trigger for cycle content page -->
+  <div class="position-fixed bottom-0 end-0 px-5 pb-5" style="z-index: 1000;">
+      <a
+        href="javascript:void(0)"
+        class="btn btn-lg btn-primary rounded-pill shadow"
+        id="cycle-button"
+        role="button"
+      >
+        <i class="fa-solid fa-plus" style="pointer-events: none"></i>
+      </a>
+  </div>
+
+  <script>
+    let cycle = false;
+    document.querySelector("#cycle-button").addEventListener("click", (e) => {
+      cycle = !cycle;
+      if (cycle == true) {
+        e.target.classList.remove("btn-primary");
+        e.target.classList.add("btn-warning");
+        e.target.getElementsByTagName("i")[0].classList.remove("fa-plus");
+        e.target
+          .getElementsByTagName("i")[0]
+          .classList.add("fa-arrow-rotate-left");
+          document.getElementById("view-page1").className = "d-none";
+          document.getElementById("view-page2").className = "d-block";
+      } else {
+        e.target.classList.remove("btn-warning");
+        e.target.classList.add("btn-primary");
+        e.target
+          .getElementsByTagName("i")[0]
+          .classList.remove("fa-arrow-rotate-left");
+        e.target.getElementsByTagName("i")[0].classList.add("fa-plus");
+        document.getElementById("view-page1").className = "d-block";
+          document.getElementById("view-page2").className = "d-none";
+        
+      }
+    });
+  </script>
+  <% } %>
+
+  <% if(type == 'urlButton'){%>
+    <!-- Button trigger for Url [url, color, icon] -->
+    <div class="position-fixed bottom-0 end-0 px-5 pb-5" style="z-index: 1000;">
+        <a href="http://localhost:3000/<%= url %>" class="btn btn-lg btn-<%= color %> rounded-pill shadow">
+            <i class="fa-solid fa-<%= icon %>"></i>
+        </a>
+      </div>
+    <% } %>
