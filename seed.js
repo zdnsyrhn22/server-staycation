@@ -2,7 +2,7 @@ var seeder = require('mongoose-seed');
 var mongoose = require('mongoose');
 
 // Connect to MongoDB via Mongoose
-seeder.connect('mongodb://127.0.0.1:27017/db_staycation', {
+seeder.connect('mongodb+srv://zsyrhn22:sandalz123@cluster0.j0yuf.mongodb.net/db_staycation?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: true,
@@ -1043,14 +1043,14 @@ var data = [
     'documents': [
       {
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903322'),
-        nameBank: 'Mandiri',
+        bankName: 'Mandiri',
         accountNumber: '089898',
         name: 'elfin',
         imageUrl: 'images/logo bca.png'
       },
       {
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903323'),
-        nameBank: 'BCA',
+        bankName: 'BCA',
         accountNumber: '878678',
         name: 'elfin',
         imageUrl: 'images/logo mandiri.png'

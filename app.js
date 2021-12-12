@@ -8,8 +8,13 @@ const session = require('express-session');
 const flash = require('connect-flash');
 //import mongoose
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/db_staycation');
-// mongoose.connect('mongodb://localhost:27017/db_bwamern');
+mongoose.connect('mongodb+srv://zsyrhn22:sandalz123@cluster0.j0yuf.mongodb.net/db_staycation?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
+// mongoose.connect('mongodb://localhost:27017/db_staycation');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

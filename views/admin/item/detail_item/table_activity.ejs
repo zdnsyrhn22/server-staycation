@@ -18,7 +18,7 @@
                     <td><%= i + 1 %></td>
                     <td><%= activity[i].name %></td>
                     <td><%= activity[i].type %></td>
-                    <td><img src="http://localhost:3000/<%= activity[i].imageUrl %>" class="img" alt="imageUrl" width="70px"></td>
+                    <td><img src="https://api-server-staycation.herokuapp.com/<%= activity[i].imageUrl %>" class="img" alt="imageUrl" width="70px"></td>
                     <td>
                         <form action="/admin/item/<%= itemId %>/activity/<%= activity[i].id %>?_method=DELETE" method="POST">
                           <a href="javascript:void()" type="button" class="btn btn-warning btn-sm" id="edit-button"  data-bs-toggle="modal" data-bs-target="#edit-activity-modal" onclick="showActivityModal(this)" data-id="<%= activity[i].id %>" data-name="<%= activity[i].name %>" data-type="<%= activity[i].type %>">
