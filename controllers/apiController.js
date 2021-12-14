@@ -10,7 +10,7 @@ module.exports = {
     try {
       const mostPicked = await Item.find()
         .select("_id title price city country unit imageId")
-        .populate({ path: "imageId", select: "_id imageUrl" })
+        .populate({ path: "imageId", select: "_id imageUrl", option: { sort: { sumBooking: -1 } }, })
         .limit(5);
 
       const category = await Category.find()
