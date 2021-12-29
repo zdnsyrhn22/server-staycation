@@ -211,7 +211,7 @@ module.exports = {
 
     try {
       const items = await Item.find({ title: { $regex: q, $options: "i" } })
-        .select("_id title city country categoryId price imageId sumBooking")
+        .select("_id title city country categoryId price unit imageId sumBooking")
         .sort(
           sort === "least booking"
             ? { sumBooking: 1 }
