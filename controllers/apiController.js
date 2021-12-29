@@ -257,13 +257,9 @@ module.exports = {
         },
       ]
 
-      const heading = {
+      res.status(200).json({
         title: "Browse By",
         subtitle: "Find a place for your staycation",
-      }
-
-      res.status(200).json({
-        heading,
         sorting,
         items
       });
