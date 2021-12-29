@@ -258,6 +258,8 @@ module.exports = {
       ]
 
       res.status(200).json({
+        title: "Browse By",
+        subtitle: "find a place for your staycation",
         sorting,
         items
       });
