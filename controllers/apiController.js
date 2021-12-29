@@ -210,7 +210,7 @@ module.exports = {
     }
 
     try {
-      const browseBy = await Item.find({ title: { $regex: q, $options: "i" } })
+      const items = await Item.find({ title: { $regex: q, $options: "i" } })
         .select("_id title city country categoryId price imageId sumBooking")
         .sort(
           sort === "least booking"
@@ -235,7 +235,7 @@ module.exports = {
         sort !== "cheapest" &&
         sort !== "pricely"
       ) {
-        shuffle(browseBy);
+        shuffle(items);
       }
 
       const sorting = [
@@ -259,7 +259,7 @@ module.exports = {
 
       res.status(200).json({
         sorting,
-        browseBy
+        items
       });
     } catch (error) {
       console.log(error);
