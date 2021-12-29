@@ -10,8 +10,8 @@ module.exports = {
     try {
       const mostPicked = await Item.find()
         .select("_id title price city country unit imageId")
-        .sort({sumBooking: -1})
-        .populate({ path: "imageId", select: "_id imageUrl"})
+        .sort({ sumBooking: -1 })
+        .populate({ path: "imageId", select: "_id imageUrl" })
         .limit(5);
 
       const category = await Category.find()
@@ -139,50 +139,130 @@ module.exports = {
         res.status(404).json({ message: "Fields not complete" });
       }
 
-      const item = await Item.findOne({_id: idItem});
+      const item = await Item.findOne({ _id: idItem });
 
-      if(!item){
+      if (!item) {
         res.status(404).json({ message: "Item not found" });
-      }else{
+      } else {
         item.sumbooking += 1;
-        item.save()
+        item.save();
       }
 
       let total = item.price * duration;
-      let tax = total * 0.10;
+      let tax = total * 0.1;
       let invoice = Math.floor(1000000 + Math.random() * 9000000);
 
       const member = await Member.create({
         firstName,
         lastName,
         email,
-        phoneNumber
+        phoneNumber,
       });
 
       const newBooking = {
         invoice,
         bookingStartDate,
         bookingEndDate,
-        total: total += tax,
+        total: (total += tax),
         itemId: {
           _id: item.id,
           title: item.title,
           price: item.price,
-          duration: duration
+          duration: duration,
         },
         memberId: member.id,
-        payments:{
+        payments: {
           proofPayment: `images/${req.file.filename}`,
           bankFrom: bankFrom,
-          accountHolder: accountHolder
-        }
-      }
+          accountHolder: accountHolder,
+        },
+      };
 
-      const booking = await Booking.create(newBooking)
-
+      const booking = await Booking.create(newBooking);
 
       res.status(201).json({ message: "Success", booking });
     } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
+  browseByPage: async (req, res) => {
+    const { sort, q } = req.query;
+
+    function shuffle(array) {
+      let currentIndex = array.length,
+        randomIndex;
+
+      // While there remain elements to shuffle...
+      while (currentIndex != 0) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex],
+          array[currentIndex],
+        ];
+      }
+
+      return array;
+    }
+
+    try {
+      const browseBy = await Item.find({ title: { $regex: q, $options: "i" } })
+        .select("_id title city country categoryId price imageId sumBooking")
+        .sort(
+          sort === "least booking"
+            ? { sumBooking: 1 }
+            : sort === "most booking"
+            ? { sumBooking: -1 }
+            : sort === "cheapest"
+            ? { price: 1 }
+            : sort === "pricely"
+            ? { price: -1 }
+            : ""
+        )
+        .populate({
+          path: "imageId",
+          select: "_id imageUrl",
+          perDocumentLimit: 1,
+        });
+
+      if (
+        sort !== "least booking" &&
+        sort !== "most booking" &&
+        sort !== "cheapest" &&
+        sort !== "pricely"
+      ) {
+        shuffle(browseBy);
+      }
+
+      const sorting = [
+        {
+          name: 'Most Booking',
+          value: 'most booking'
+        },
+        {
+          name: 'Least Booking',
+          value: 'least booking'
+        },
+        {
+          name: 'Pricely',
+          value: 'pricely'
+        },
+        {
+          name: 'Cheapest',
+          value: 'cheapest'
+        },
+      ]
+
+      res.status(200).json({
+        sorting,
+        browseBy
+      });
+    } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Internal server error" });
     }
   },

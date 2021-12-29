@@ -7,5 +7,6 @@ const {upload} = require('../middlewares/multer');
 router.get('/landing-page', apiController.landingPage);
 router.get('/detail-page/:id', apiController.detailPage);
 router.post('/booking-page', upload, apiController.bookingPage);
+router.get('/browse-by-page/search', apiController.browseByPage);
 
 module.exports = router
