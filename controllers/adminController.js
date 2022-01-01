@@ -299,6 +299,7 @@ exports.addItem = async (req, res) => {
         city,
         price,
         categoryId: category._id,
+        sumBooking: 0,
         description,
         unit: "night",
       };
