@@ -144,7 +144,7 @@ module.exports = {
       if (!item) {
         res.status(404).json({ message: "Item not found" });
       } else {
-        item.sumbooking += 1;
+        item.sumBooking += 1;
         item.save();
       }
 
@@ -211,7 +211,9 @@ module.exports = {
 
     try {
       const items = await Item.find({ title: { $regex: q, $options: "i" } })
-        .select("_id title city country categoryId price unit imageId sumBooking")
+        .select(
+          "_id title city country categoryId price unit imageId sumBooking"
+        )
         .sort(
           sort === "least booking"
             ? { sumBooking: 1 }
@@ -240,32 +242,32 @@ module.exports = {
 
       const sorting = [
         {
-          name: 'Most Booking',
-          value: 'most booking'
+          name: "Most Booking",
+          value: "most booking",
         },
         {
-          name: 'Least Booking',
-          value: 'least booking'
+          name: "Least Booking",
+          value: "least booking",
         },
         {
-          name: 'Pricely',
-          value: 'pricely'
+          name: "Pricely",
+          value: "pricely",
         },
         {
-          name: 'Cheapest',
-          value: 'cheapest'
+          name: "Cheapest",
+          value: "cheapest",
         },
-      ]
+      ];
 
       const heading = {
         title: "Browse By",
-        subtitle: "Find a place for your staycation"
-      }
+        subtitle: "Find a place for your staycation",
+      };
 
       res.status(200).json({
         heading,
         sorting,
-        items
+        items,
       });
     } catch (error) {
       console.log(error);
