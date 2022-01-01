@@ -83,16 +83,15 @@ exports.viewDashboard = async (req, res) => {
   const booking = await Booking.find();
   const item = await Item.find();
   const member = await Member.find();
-  
+
   try {
-    res.render("admin/dashboard/view_dashboard", { 
+    res.render("admin/dashboard/view_dashboard", {
       title: "Dashboard",
-      user:  req.session.user,
+      user: req.session.user,
       category,
       booking,
       item,
       member,
-    
     });
   } catch (error) {
     res.redirect("/admin/dashboard");
@@ -301,6 +300,7 @@ exports.addItem = async (req, res) => {
         price,
         categoryId: category._id,
         description,
+        unit: "night",
       };
 
       const item = await Item.create(newItem);
@@ -666,10 +666,10 @@ exports.viewBooking = async (req, res) => {
 
     res.render("admin/booking/view_booking", {
       title: "Booking",
-      booking
+      booking,
     });
   } catch (error) {
-    res.redirect('/admin/booking')
+    res.redirect("/admin/booking");
   }
 };
 
@@ -677,8 +677,7 @@ exports.viewDetailBooking = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const booking = await Booking.findOne({_id: id})
-    .populate("memberId")
+    const booking = await Booking.findOne({ _id: id }).populate("memberId");
 
     const alertMessage = req.flash("alertMessage");
     const alertStatus = req.flash("alertStatus");
@@ -687,41 +686,41 @@ exports.viewDetailBooking = async (req, res) => {
     res.render("admin/booking/detail_booking", {
       title: "Detail Booking",
       booking,
-      alert
+      alert,
     });
   } catch (error) {
-    res.redirect('/admin/booking')
+    res.redirect("/admin/booking");
   }
-}
+};
 
 exports.actionConfirmation = async (req, res) => {
   const { id } = req.params;
   try {
-    const booking = await Booking.findOne({_id: id})
-    booking.payments.status = 'Accept';
+    const booking = await Booking.findOne({ _id: id });
+    booking.payments.status = "Accept";
     await booking.save();
 
     req.flash("alertMessage", "Success Confirmation Payment");
     req.flash("alertStatus", "success");
 
-    res.redirect(`/admin/booking/${id}`)
+    res.redirect(`/admin/booking/${id}`);
   } catch (error) {
-    res.redirect(`/admin/booking/${id}`)
+    res.redirect(`/admin/booking/${id}`);
   }
-}
+};
 
 exports.actionReject = async (req, res) => {
   const { id } = req.params;
   try {
-    const booking = await Booking.findOne({_id: id})
-    booking.payments.status = 'Reject';
+    const booking = await Booking.findOne({ _id: id });
+    booking.payments.status = "Reject";
     await booking.save();
 
     req.flash("alertMessage", "Success Reject Payment");
     req.flash("alertStatus", "success");
 
-    res.redirect(`/admin/booking/${id}`)
+    res.redirect(`/admin/booking/${id}`);
   } catch (error) {
-    res.redirect(`/admin/booking/${id}`)
+    res.redirect(`/admin/booking/${id}`);
   }
-}
+};
