@@ -66,6 +66,8 @@ exports.actionLogin = async (req, res) => {
       username: user.username,
     };
 
+    console.log(req.session);
+
     res.redirect("/admin/dashboard");
   } catch (error) {
     res.redirect("/admin/login");
